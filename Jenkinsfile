@@ -1,9 +1,15 @@
 pipeline {
     agent any
     tools {
-        maven 'Maven 3.8.6' // Укажите название Maven из настроек Jenkins
+        jdk 'JDK 17'
+        maven 'Maven 3.8.6'
     }
     stages {
+        stage('Install Tools') {
+            steps {
+                bat 'choco install openjdk17 maven -y'
+            }
+        }
         stage('Checkout') {
             steps {
                checkout([
