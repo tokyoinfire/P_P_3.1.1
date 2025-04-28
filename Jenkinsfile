@@ -6,7 +6,15 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                checkout scm // Клонирует репозиторий из GitHub
+               checkout([
+                                   $class: 'GitSCM',
+                                   branches: [[name: '*/main']],
+                                   extensions: [],
+                                   userRemoteConfigs: [[
+                                       credentialsId: 'test123123123',
+                                       url: 'https://github.com/tokyoinfire/P_P_3.1.1.git'
+                                   ]]
+                               ])
             }
         }
         stage('Build') {
